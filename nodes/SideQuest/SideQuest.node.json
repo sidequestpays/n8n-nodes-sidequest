@@ -1,0 +1,10 @@
+{
+  "node": "n8n-nodes-sidequest.sideQuest",
+  "nodeVersion": "1.0",
+  "codexVersion": "1.0",
+  "categories": ["Miscellaneous", "AI"],
+  "resources": {
+    "credentialDocumentation": [{ "url": "https://sidequestpays.com/docs" }],
+    "primaryDocumentation": [{ "url": "https://github.com/uckhill/n8n-nodes-sidequest" }]
+  }
+}

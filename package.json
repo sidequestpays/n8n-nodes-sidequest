@@ -1,0 +1,50 @@
+{
+  "name": "n8n-nodes-sidequest",
+  "version": "0.1.1",
+  "description": "n8n node for SideQuest: hire verified people for real-world tasks like checking a store, taking photos, making a phone call, or inspecting an item.",
+  "keywords": [
+    "n8n-community-node-package",
+    "sidequest",
+    "ai agents",
+    "human in the loop",
+    "real world tasks",
+    "gig"
+  ],
+  "license": "MIT",
+  "homepage": "https://sidequestpays.com",
+  "author": {
+    "name": "Crescent Harbor LLC",
+    "email": "hello@sidequestpays.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uckhill/n8n-nodes-sidequest.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && mkdir -p dist/nodes/SideQuest && cp nodes/SideQuest/sidequest.svg nodes/SideQuest/SideQuest.node.json dist/nodes/SideQuest/",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/SideQuestApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/SideQuest/SideQuest.node.js"
+    ]
+  },
+  "devDependencies": {
+    "n8n-workflow": "^1.82.0",
+    "typescript": "^5.6.0"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/uckhill/n8n-nodes-sidequest/issues"
+  }
+}
