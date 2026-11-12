@@ -1,9 +1,11 @@
-import type { IAuthenticateGeneric, ICredentialTestRequest, ICredentialType, INodeProperties } from 'n8n-workflow';
+import type { IAuthenticateGeneric, ICredentialTestRequest, ICredentialType, Icon, INodeProperties } from 'n8n-workflow';
 
 export class SideQuestApi implements ICredentialType {
 	name = 'sideQuestApi';
 
 	displayName = 'SideQuest API';
+
+	icon: Icon = { light: 'file:../nodes/SideQuest/sidequest.svg', dark: 'file:../nodes/SideQuest/sidequest.dark.svg' };
 
 	documentationUrl = 'https://sidequestpays.com/docs';
 

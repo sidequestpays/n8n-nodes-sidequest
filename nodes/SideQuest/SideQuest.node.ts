@@ -1,5 +1,5 @@
 import type { IDataObject, IExecuteFunctions, IHttpRequestMethods, INodeExecutionData, INodeType, INodeTypeDescription } from 'n8n-workflow';
-import { NodeApiError, NodeOperationError } from 'n8n-workflow';
+import { NodeApiError, NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 
 const TEMPLATES = [
 	{ name: 'Check a Place (In Person)', value: 'verify_location' },
@@ -18,14 +18,14 @@ export class SideQuest implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'SideQuest',
 		name: 'sideQuest',
-		icon: 'file:sidequest.svg',
+		icon: { light: 'file:sidequest.svg', dark: 'file:sidequest.dark.svg' },
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description: 'Hire a verified person for a real-world task: check a place, take photos, make a phone call, inspect an item, or run a pickup',
 		defaults: { name: 'SideQuest' },
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [NodeConnectionTypes.Main],
+		outputs: [NodeConnectionTypes.Main],
 		usableAsTool: true,
 		credentials: [{ name: 'sideQuestApi', required: true }],
 		properties: [
@@ -52,7 +52,7 @@ export class SideQuest implements INodeType {
 					{ name: 'Create', value: 'create', action: 'Post a paid quest' },
 					{ name: 'Dispute', value: 'dispute', action: 'Dispute submitted proof' },
 					{ name: 'Get', value: 'get', action: 'Get a quest with its status and proof' },
-					{ name: 'Get Many', value: 'getAll', action: 'List your quests' },
+					{ name: 'Get Many', value: 'getAll', action: 'Get many quests' },
 				],
 				default: 'create',
 			},
@@ -216,13 +216,13 @@ export class SideQuest implements INodeType {
 				type: 'options',
 				options: [
 					{ name: 'Any', value: '' },
-					{ name: 'Open', value: 'open' },
-					{ name: 'Claimed', value: 'claimed' },
-					{ name: 'Submitted', value: 'submitted' },
-					{ name: 'Paid', value: 'paid' },
-					{ name: 'Disputed', value: 'disputed' },
 					{ name: 'Cancelled', value: 'cancelled' },
+					{ name: 'Claimed', value: 'claimed' },
+					{ name: 'Disputed', value: 'disputed' },
+					{ name: 'Open', value: 'open' },
+					{ name: 'Paid', value: 'paid' },
 					{ name: 'Refunded', value: 'refunded' },
+					{ name: 'Submitted', value: 'submitted' },
 				],
 				default: '',
 				displayOptions: { show: { resource: ['quest'], operation: ['getAll'] } },
@@ -314,7 +314,7 @@ export class SideQuest implements INodeType {
 					out.push({ json: { error: (error as Error).message }, pairedItem: { item: i } });
 					continue;
 				}
-				throw error;
+				throw new NodeOperationError(this.getNode(), error as Error, { itemIndex: i });
 			}
 		}
 		return [out];

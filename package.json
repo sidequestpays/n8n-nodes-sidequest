@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-sidequest",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "n8n node for SideQuest: hire verified people for real-world tasks like checking a store, taking photos, making a phone call, or inspecting an item.",
   "keywords": [
     "n8n-community-node-package",
@@ -22,7 +22,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "tsc && mkdir -p dist/nodes/SideQuest && cp nodes/SideQuest/sidequest.svg nodes/SideQuest/SideQuest.node.json dist/nodes/SideQuest/",
+    "build": "tsc && mkdir -p dist/nodes/SideQuest && cp nodes/SideQuest/sidequest.svg nodes/SideQuest/sidequest.dark.svg nodes/SideQuest/SideQuest.node.json dist/nodes/SideQuest/",
     "prepublishOnly": "npm run build"
   },
   "files": [
