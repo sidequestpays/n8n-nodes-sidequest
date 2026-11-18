@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-sidequest",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "n8n node for SideQuest: hire verified people for real-world tasks like checking a store, taking photos, making a phone call, or inspecting an item.",
   "keywords": [
     "n8n-community-node-package",

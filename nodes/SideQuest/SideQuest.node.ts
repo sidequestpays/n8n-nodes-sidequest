@@ -157,6 +157,46 @@ export class SideQuest implements INodeType {
 				displayOptions: { show: { resource: ['quest'], operation: ['create'], template: ['translation'] } },
 			},
 			{
+				displayName: 'Phone Numbers',
+				name: 'phoneNumbers',
+				type: 'string',
+				typeOptions: { rows: 2 },
+				default: '',
+				required: true,
+				placeholder: '+1 215 555 0100',
+				description: 'The number to call, with country code. To have one quester call several numbers (up to 25), put one per line or separate them with commas.',
+				displayOptions: { show: { resource: ['quest'], operation: ['create'], template: ['phone_call'] } },
+			},
+			{
+				displayName: 'If No Answer',
+				name: 'ifNoAnswer',
+				type: 'options',
+				options: [
+					{ name: 'Leave a Voicemail', value: 'voicemail' },
+					{ name: 'Call up to 3 Times, Then Leave a Voicemail', value: 'retry_then_voicemail' },
+				],
+				default: 'voicemail',
+				description: 'What the quester does when nobody picks up. Either counts as done.',
+				displayOptions: { show: { resource: ['quest'], operation: ['create'], template: ['phone_call'] } },
+			},
+			{
+				displayName: 'Record Call',
+				name: 'recordCall',
+				type: 'boolean',
+				default: false,
+				description: 'Whether the quester records the call if someone answers (they announce the recording)',
+				displayOptions: { show: { resource: ['quest'], operation: ['create'], template: ['phone_call'] } },
+			},
+			{
+				displayName: 'Callback Number',
+				name: 'callbackNumber',
+				type: 'string',
+				default: '',
+				placeholder: '+1 215 555 0199',
+				description: 'Number the quester leaves in voicemails for callbacks',
+				displayOptions: { show: { resource: ['quest'], operation: ['create'], template: ['phone_call'] } },
+			},
+			{
 				displayName: 'Additional Fields',
 				name: 'additionalFields',
 				type: 'collection',
@@ -288,6 +328,25 @@ export class SideQuest implements INodeType {
 						if (!body.lat && !body.lng) throw new NodeOperationError(this.getNode(), 'Latitude and longitude are required for in-person quests.', { itemIndex: i });
 					}
 					if (template === 'translation') body.language = this.getNodeParameter('language', i) as string;
+					if (template === 'phone_call') {
+						const numbers = String(this.getNodeParameter('phoneNumbers', i, ''))
+							.split(/[\n,;]+/)
+							.map((s) => s.trim())
+							.filter((s) => s.replace(/\D/g, '').length >= 7);
+						if (!numbers.length)
+							throw new NodeOperationError(this.getNode(), 'Enter at least one phone number to call, with country code.', { itemIndex: i });
+						if (numbers.length > 25)
+							throw new NodeOperationError(this.getNode(), 'A phone call quest can have up to 25 numbers.', { itemIndex: i });
+						const call: IDataObject = {
+							number: numbers[0],
+							if_no_answer: this.getNodeParameter('ifNoAnswer', i, 'voicemail') as string,
+							record: this.getNodeParameter('recordCall', i, false) as boolean,
+						};
+						if (numbers.length > 1) call.numbers = numbers;
+						const callback = String(this.getNodeParameter('callbackNumber', i, '')).trim();
+						if (callback) call.callback_number = callback;
+						details.call = call;
+					}
 					if (extra.country) body.country = extra.country;
 					if (extra.maxTotal) body.max_total_usd = extra.maxTotal;
 					const checklist = String(extra.checklist || '').split('\n').map((s) => s.trim()).filter(Boolean);

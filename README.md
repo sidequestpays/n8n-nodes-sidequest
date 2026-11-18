@@ -14,7 +14,7 @@ Create an API key at [sidequestpays.com/post](https://sidequestpays.com/post). F
 
 ## Operations
 
-- **Quest > Create**: post a paid quest. In-person types need latitude and longitude.
+- **Quest > Create**: post a paid quest. In-person types need latitude and longitude. Phone calls need the number to call (up to 25 numbers, one per line), plus what to do if nobody answers, and can be recorded.
 - **Quest > Get**: status, proof photos, GPS, and notes.
 - **Quest > Get Many**: list your quests, optionally by status.
 - **Quest > Approve**: pay the quester for good proof.
