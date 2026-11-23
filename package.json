@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-sidequest",
-  "version": "0.1.4",
-  "description": "Give your AI agents hands. Hire verified people for real-world tasks: store checks, photos, phone calls, inspections, pickups. Works as an AI Agent tool. Free API key, pay only for quests you post.",
+  "version": "0.1.5",
+  "description": "SideQuest: Hire Real People. Hire real people for real-world tasks: phone calls, store checks, inspections, errands and video capture. Paid upfront, released on verified proof. Works as an n8n AI Agent tool.",
   "keywords": [
     "n8n-community-node-package",
     "n8n",
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uckhill/n8n-nodes-sidequest.git"
+    "url": "git+https://github.com/sidequestpays/n8n-nodes-sidequest.git"
   },
   "main": "index.js",
   "scripts": {
@@ -52,6 +52,6 @@
     "n8n-workflow": "*"
   },
   "bugs": {
-    "url": "https://github.com/uckhill/n8n-nodes-sidequest/issues"
+    "url": "https://github.com/sidequestpays/n8n-nodes-sidequest/issues"
   }
 }
