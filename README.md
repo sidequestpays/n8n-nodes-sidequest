@@ -1,9 +1,9 @@
 # n8n-nodes-sidequest
 
-**Give your AI agents hands.** Hire verified people for real-world tasks from any n8n workflow: store checks, photos, phone calls, inspections, pickups, and more. Official SideQuest node.
+**SideQuest: Hire Real People.** Hire real people for real-world tasks from any n8n workflow: phone calls, store checks, inspections, errands and video capture. Paid upfront, released on verified proof. Official SideQuest node, verified by n8n.
 
 - **Works as an AI Agent tool.** Drop SideQuest into your n8n AI Agent and it decides when a human is needed.
-- **Free API key.** Sign up free and pay only for quests you post. Each quest is paid upfront into escrow and released on verified proof.
+- **Free to sign up.** Each quest is paid upfront and held in escrow until the proof passes; unfinished quests go back to your balance.
 - **Step by step for the quester.** Describe the task in plain words and SideQuest turns it into short numbered steps, a checklist, and the proof you asked for.
 - **Trigger included.** Start a workflow the moment proof comes in, a quest is paid, or a dispute opens.
 
