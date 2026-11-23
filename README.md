@@ -1,8 +1,11 @@
 # n8n-nodes-sidequest
 
-An [n8n](https://n8n.io) community node for [SideQuest](https://sidequestpays.com). Hire a verified person for a real-world task from any workflow, or give your n8n AI Agent the SideQuest tool so it can decide when a human is needed.
+**Give your AI agents hands.** Hire verified people for real-world tasks from any n8n workflow: store checks, photos, phone calls, inspections, pickups, and more. Official SideQuest node.
 
-Quest types: check a place, photos of something, pickup and drop-off, inspect an item, be there for a set time, phone call, translation, and check AI output. Every quest is paid upfront into escrow, and the person submits photo, GPS, and written proof.
+- **Works as an AI Agent tool.** Drop SideQuest into your n8n AI Agent and it decides when a human is needed.
+- **Free API key.** Sign up free and pay only for quests you post. Each quest is paid upfront into escrow and released on verified proof.
+- **Step by step for the quester.** Describe the task in plain words and SideQuest turns it into short numbered steps, a checklist, and the proof you asked for.
+- **Trigger included.** Start a workflow the moment proof comes in, a quest is paid, or a dispute opens.
 
 ## Install
 
@@ -10,23 +13,32 @@ In n8n: **Settings > Community Nodes > Install**, then enter `n8n-nodes-sideques
 
 ## Credentials
 
-Create an API key at [sidequestpays.com/post](https://sidequestpays.com/post). For workflows, create a capped agent key (`POST /v1/keys` with `max_quest_usd` and `daily_limit_usd`) so a workflow can't overspend. Add it in n8n as **SideQuest API**.
+Create a free API key at [sidequestpays.com/post](https://sidequestpays.com/post). For workflows, use a capped agent key so a workflow can't overspend. Add it in n8n as **SideQuest API**.
 
-## Operations
+## Nodes
 
-- **Quest > Create**: post a paid quest. In-person types need latitude and longitude. Phone calls need the number to call (up to 25 numbers, one per line), plus what to do if nobody answers, and can be recorded.
-- **Quest > Get**: status, proof photos, GPS, and notes.
-- **Quest > Get Many**: list your quests, optionally by status.
-- **Quest > Approve**: pay the quester for good proof.
-- **Quest > Dispute**: send proof to review with a reason.
-- **Quest > Cancel**: cancel before anyone claims it. The full amount goes back to your SideQuest balance.
+### SideQuest
+
+- **Quest > Create**: post a paid quest. Types: check a place, photos of something, pickup and drop-off, inspect an item, be there for a set time, anything else in person, phone call, translation, check AI output, record a video, and online tasks. US street addresses are located for you.
+- **Quest > Get** and **Get Many**: status, proof, and the quester's verdict.
+- **Quest > Get Proof**: photos, checklist answers, GPS distance, and call transcripts.
+- **Quest > Send Message** and **Get Messages**: talk with the quester.
+- **Quest > Boost**: raise the reward on a quest nobody has taken yet.
+- **Quest > Approve**, **Dispute**, **Cancel**.
 - **Balance > Get**: your prepaid balance and limits.
 
-The node is usable as a tool by n8n's AI Agent.
+### SideQuest Trigger
+
+Starts a workflow when one of your quests is accepted, gets proof, is paid, is disputed, is refunded, or is cancelled. Checks for changes on your workflow's polling schedule.
 
 ## Example
 
-Trigger on a new rental listing, then **SideQuest > Quest > Create** with type *Photos of something*, the listing address, and a $15 reward. Poll **Quest > Get** until the status is `submitted`, then **Approve**.
+**Schedule > SideQuest > Quest > Create** a store check at each location. Then **SideQuest Trigger** on *Proof Submitted* > **Get Proof** > send the photos to Slack.
+
+## Links
+
+- Docs: [sidequestpays.com/docs](https://sidequestpays.com/docs)
+- Support: hello@sidequestpays.com
 
 ## License
 

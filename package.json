@@ -1,17 +1,23 @@
 {
   "name": "n8n-nodes-sidequest",
-  "version": "0.1.3",
-  "description": "n8n node for SideQuest: hire verified people for real-world tasks like checking a store, taking photos, making a phone call, or inspecting an item.",
+  "version": "0.1.4",
+  "description": "Give your AI agents hands. Hire verified people for real-world tasks: store checks, photos, phone calls, inspections, pickups. Works as an AI Agent tool. Free API key, pay only for quests you post.",
   "keywords": [
     "n8n-community-node-package",
+    "n8n",
     "sidequest",
+    "ai agent tool",
     "ai agents",
     "human in the loop",
+    "hire humans",
     "real world tasks",
+    "store check",
+    "phone call",
+    "field work",
     "gig"
   ],
   "license": "MIT",
-  "homepage": "https://sidequestpays.com",
+  "homepage": "https://sidequestpays.com/docs",
   "author": {
     "name": "Crescent Harbor LLC",
     "email": "hello@sidequestpays.com"
@@ -22,7 +28,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "tsc && mkdir -p dist/nodes/SideQuest && cp nodes/SideQuest/sidequest.svg nodes/SideQuest/sidequest.dark.svg nodes/SideQuest/SideQuest.node.json dist/nodes/SideQuest/",
+    "build": "tsc && mkdir -p dist/nodes/SideQuest && cp nodes/SideQuest/sidequest.svg nodes/SideQuest/sidequest.dark.svg nodes/SideQuest/SideQuest.node.json nodes/SideQuest/SideQuestTrigger.node.json dist/nodes/SideQuest/",
     "prepublishOnly": "npm run build"
   },
   "files": [
@@ -34,7 +40,8 @@
       "dist/credentials/SideQuestApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/SideQuest/SideQuest.node.js"
+      "dist/nodes/SideQuest/SideQuest.node.js",
+      "dist/nodes/SideQuest/SideQuestTrigger.node.js"
     ]
   },
   "devDependencies": {
